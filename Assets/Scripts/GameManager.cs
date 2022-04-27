@@ -57,12 +57,6 @@ public class GameManager : MonoBehaviour {
         levelImage.SetActive(false);
         doingSetup = false;
     }
-    void FixedUpdate ()
-    {
-        if (enemiesMoving ||doingSetup)
-            return;
-        StartCoroutine(MoveEnemies());
-    }
 
     public void AddEnemyToList(Enemy script)
     {
@@ -73,23 +67,5 @@ public class GameManager : MonoBehaviour {
         levelText.text = "you reached level" + level;
         levelImage.SetActive(true);
         enabled = false;
-    }
-
-    IEnumerator MoveEnemies()
-    {
-        enemiesMoving = true;
-        yield return new WaitForSeconds(turnDelay);
-        if (enemies.Count == 0)
-        {
-            yield return new WaitForSeconds(turnDelay);
-        }
-        
-        for (int i = 0; i < enemies.Count; i++)
-        {
-            enemies[i].MoveEnemy();
-            yield return new WaitForSeconds(enemies[i].moveSpeed);
-        }
-
-        enemiesMoving = false;
     }
 }

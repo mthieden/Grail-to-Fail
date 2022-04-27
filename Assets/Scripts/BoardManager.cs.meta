@@ -3,7 +3,17 @@ guid: 34b5090fcfb3daab8a1503a3b8a5cf19
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - groundTile: {fileID: 11400000, guid: 8bbe232e266e01d80a8ec78ce14a3133, type: 2}
+  - pitTile: {fileID: 11400000, guid: 00333f5d25d5c2571a61d01f51e27729, type: 2}
+  - topWallTile: {fileID: 11400000, guid: 9479cd10080bc1a8e8934cf37256129a, type: 2}
+  - botWallTile: {fileID: 11400000, guid: fd1e3cefba2ea6d75912026729d503d2, type: 2}
+  - groundMap: {fileID: 263626000614169671, guid: bdd92773a190ab0e5b2b80263c4ba2ff,
+      type: 3}
+  - pitMap: {instanceID: 0}
+  - wallMap: {instanceID: 0}
+  - player: {instanceID: 0}
+  - exit: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

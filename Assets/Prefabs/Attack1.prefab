@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 5497920871090269336}
   - component: {fileID: 661328867267640788}
   - component: {fileID: 9050358539352987747}
-  m_Layer: 0
+  - component: {fileID: -8049058559103647498}
+  m_Layer: 7
   m_Name: Attack1
   m_TagString: Food
   m_Icon: {fileID: 0}
@@ -97,7 +98,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.0030825138, y: 0.0030825138}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -108,7 +109,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.25401688, y: 1.2281103}
   m_EdgeRadius: 0
 --- !u!50 &9050358539352987747
 Rigidbody2D:
@@ -131,3 +132,17 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &-8049058559103647498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 956648772370266860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d768cefb20675194485c9d87680dd700, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  modifier: 0

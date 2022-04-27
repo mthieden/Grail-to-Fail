@@ -1,60 +1,110 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Pathfinding;
 
-public class Enemy : MovingObject {
+public class Enemy : MonoBehaviour
+{
+    public float moveSpeed = 200f;
+    public float nextWayPointDistance = 3f;
+    Path path;
+    int currentWaypoint = 0;
+    bool reachedEndOfPath = false;
 
-    public int playerDamage;
+    Seeker seeker;
+    public int hp;
+    public int damage;
+    public float detectionAoe;
+    public float attackSpeed;
+    private BoxCollider2D boxCollider;
+    private Rigidbody2D rb2D;
 
+    private Transform player;
 
     private Animator animator;
-    private Transform target;
-    private bool skipMove;
-    public AudioClip enemyAttack1;
-    public AudioClip enemyAttack2;
 
-    protected override void Start()
+    public float stopdistance;
+
+
+protected virtual void Start()
+{
+    animator = GetComponent<Animator>();
+    seeker = GetComponent<Seeker>();
+    player = GameObject.FindObjectOfType<Player>().transform;
+    boxCollider = GetComponent<BoxCollider2D>();
+    rb2D = GetComponent<Rigidbody2D>();
+
+    InvokeRepeating("UpdatePath", 0f, .5f);
+
+
+}
+protected virtual void UpdatePath()
+{
+    if (seeker.IsDone())
+        seeker.StartPath(rb2D.position, player.position, OnPathComplete);
+}
+protected virtual void OnPathComplete(Path p)
+{
+    if(!p.error)
     {
-        GameManager.instance.AddEnemyToList(this);
-        animator = GetComponent<Animator>();
-        target = GameObject.FindGameObjectWithTag("Player").transform;
-        base.Start();
-    }
-
-    protected override void AttemptMove <T> (float xDir, float yDir)
-    {
-        if (skipMove)
-        {
-            skipMove = false;
-            return;
-        }
-
-        base.AttemptMove<T>(xDir, yDir);
-
-        skipMove = true;
-    }
-
-    public void MoveEnemy()
-    {
-        float xDir = 0;
-        float yDir = 0;
-
-        if (Mathf.Abs(target.position.x - transform.position.x) < float.Epsilon)
-            yDir = target.position.y > transform.position.y ? 1 : -1;
-        else
-            xDir = target.position.x > transform.position.x ? 1 : -1;
-
-        AttemptMove<Player>(xDir, yDir);
-    }
-
-    protected override void OnCantMove <T> (T component)
-    {
-        Player hitPlayer = component as Player;
-
-        animator.SetTrigger("enemyAttack");
-
-        SoundManager.instance.RandomizeSfx(enemyAttack1, enemyAttack2);
-
-        hitPlayer.LoseFood(playerDamage);
+        path = p;
+        currentWaypoint = 0;
     }
 }
+protected virtual void FixedUpdate()
+{
+    if (path == null)
+    {
+        return;
+    }
+    if (currentWaypoint >= path.vectorPath.Count)
+    {
+        reachedEndOfPath = true;
+        return;
+    } else
+    {
+        reachedEndOfPath = false;
+    }
+
+    Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb2D.position).normalized;
+    Vector2 force = direction * moveSpeed * Time.deltaTime;
+    Move(force);
+    float distance = Vector2.Distance(rb2D.position, path.vectorPath[currentWaypoint]);
+
+    if (distance < nextWayPointDistance)
+    {
+        currentWaypoint++;
+    }
+    LookDirection(force);
+
+}
+protected virtual void Move(Vector2 force)
+{
+    if((Vector2.Distance(transform.position, player.position) < detectionAoe) & (Vector2.Distance(transform.position, player.position) > stopdistance)){
+        rb2D.AddForce(force);
+        animator.SetBool("enemyRunning", true);
+    }
+    if (Vector2.Distance(transform.position, player.position) < stopdistance){
+        animator.SetBool("enemyRunning", false);
+        animator.SetBool("enemyHit", true);
+    } 
+    if (Vector2.Distance(transform.position, player.position) > stopdistance){
+        animator.SetBool("enemyHit", false);
+    }
+}
+protected virtual void Attack(){
+    GameObject.FindObjectOfType<Player>().health -= damage;
+}
+protected virtual void LookDirection(Vector2 force)
+{
+    if (force.x >= 0.01f)
+    {
+        rb2D.transform.localScale = new Vector3 (1f,1f,1f);
+    }
+    else if (force.x <= -0.01f)
+    {
+        rb2D.transform.localScale = new Vector3 (-1f,1f,1f);
+    }
+}
+}
+
