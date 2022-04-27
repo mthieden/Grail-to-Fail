@@ -7,6 +7,8 @@ public class Player : MovingObject {
 
 
     public int wallDamage = 1;
+
+    public int health = 100;
     public int pointsPerFood = 10;
     public int pointsPerSoda = 20;
     public float restartLevelDelay = 1f;
@@ -92,6 +94,7 @@ public class Player : MovingObject {
         CheckIfGameOver();
 
     }
+    
     private void LookDirection()
     {
         Vector2 lookDir = mousePos - playerbody.position;
