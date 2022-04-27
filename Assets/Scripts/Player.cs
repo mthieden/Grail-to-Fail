@@ -65,7 +65,6 @@ public class Player : MovingObject {
         else
             animator.SetBool("playerRunning", true);
         AttemptMove<Wall> (moveDirection.x, moveDirection.y);
-        Debug.Log( "x : " + moveDirection.x +", y ; "+ moveDirection.y);
 
     }
 

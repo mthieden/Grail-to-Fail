@@ -330,10 +330,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea6afc7110d244a48a7e655557f0f31d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  efxSource: {fileID: 1656803800}
-  musicSource: {fileID: 1656803799}
-  lowPitchRange: 0.95
-  highPitchRange: 1.05
 --- !u!82 &1656803799
 AudioSource:
   m_ObjectHideFlags: 0
@@ -656,6 +652,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 8145719823071823870, guid: 20d2971beeebe9cd09b19556ba5ed3f7,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20d2971beeebe9cd09b19556ba5ed3f7, type: 3}
