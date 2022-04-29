@@ -61,14 +61,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34b5090fcfb3daab8a1503a3b8a5cf19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  columns: 20
-  rows: 20
-  wallCount:
-    minimum: 8
-    maximum: 12
-  foodCount:
-    minimum: 8
-    maximum: 13
   exit: {fileID: 2176577432594065368, guid: a1eeb63b4c865a03a8e56a2a1645c917, type: 3}
   floorTiles:
   - {fileID: 2994719234761213150, guid: 58453c60ad8ad8c0ba484051facc2989, type: 3}
@@ -79,47 +71,14 @@ MonoBehaviour:
   - {fileID: 5269841538796851775, guid: af34d5dc453d18998aa7da2b7f60da3b, type: 3}
   - {fileID: 413125120838707116, guid: d9ec5ff24af854d4388a8d5176b75591, type: 3}
   - {fileID: 8892566608803608818, guid: 53f804936fec953f3a358bea3c53c7cc, type: 3}
-  wallTopTiles:
-  - {fileID: 3024832897622580885, guid: efe0c9bd99c920f7ab4d96e365c8f766, type: 3}
-  - {fileID: 4324802371720059573, guid: 11ae140321980a0d083cf19930ec38ba, type: 3}
-  - {fileID: 5721618194710135659, guid: cd3796e2625117014bee63e1d1d22dee, type: 3}
-  wallInnerTiles:
-  - {fileID: 7175370857568594597, guid: 84a426f79d8a43f3dafd4101d73c2066, type: 3}
-  - {fileID: 6411552841964060337, guid: 2833b5015b5ff73bf973631def2d9535, type: 3}
-  - {fileID: 4460677600338073629, guid: 2345376bc21578ece9d6229c68da4ac1, type: 3}
-  - {fileID: 6518141677396658085, guid: 07367dac6939eccfebc2b6194d69d7a3, type: 3}
-  - {fileID: 3593941793425117543, guid: 0dbfa77aad1a339e6ba51d547df09e1d, type: 3}
-  - {fileID: 9057130923368169060, guid: a4388af1dcf874c51b22fe5343a856a9, type: 3}
-  wallSideTiles:
-  - {fileID: 720712121213023640, guid: def286a70702e2d999ef14ed1c0f5312, type: 3}
-  - {fileID: 1450210304086034654, guid: b51a27649ffe1afb6ad437a7cd3f3601, type: 3}
-  - {fileID: 996298341278625016, guid: 50eb04c31996d9f6298306292c087738, type: 3}
-  - {fileID: 8227723141330817891, guid: 1d36110b58e66978b8f550a647a87472, type: 3}
-  - {fileID: 3154786804435165318, guid: 752abd0212e11c7c4b18d2850cb1011d, type: 3}
-  - {fileID: 2782199628553210453, guid: 4b711c6ee1ab350b69d71373476285cb, type: 3}
   wallTiles:
   - {fileID: 4764315596172853462, guid: 98ca2b4646a0284f4b7084ffc679b3d2, type: 3}
   - {fileID: 9169723746930017575, guid: a38a2fe629c91e79ca4e7100761d10ea, type: 3}
   - {fileID: 7512427723648234251, guid: a78bdcea25135ff41a826044a0da7721, type: 3}
   foodTiles: []
-  enemyTiles:
-  - {fileID: 7512427723648234251, guid: a78bdcea25135ff41a826044a0da7721, type: 3}
-  outerWallTiles:
-  - {fileID: 3024832897622580885, guid: efe0c9bd99c920f7ab4d96e365c8f766, type: 3}
-  - {fileID: 4324802371720059573, guid: 11ae140321980a0d083cf19930ec38ba, type: 3}
-  - {fileID: 5721618194710135659, guid: cd3796e2625117014bee63e1d1d22dee, type: 3}
-  - {fileID: 7175370857568594597, guid: 84a426f79d8a43f3dafd4101d73c2066, type: 3}
-  - {fileID: 6411552841964060337, guid: 2833b5015b5ff73bf973631def2d9535, type: 3}
-  - {fileID: 4460677600338073629, guid: 2345376bc21578ece9d6229c68da4ac1, type: 3}
-  - {fileID: 6518141677396658085, guid: 07367dac6939eccfebc2b6194d69d7a3, type: 3}
-  - {fileID: 3593941793425117543, guid: 0dbfa77aad1a339e6ba51d547df09e1d, type: 3}
-  - {fileID: 9057130923368169060, guid: a4388af1dcf874c51b22fe5343a856a9, type: 3}
-  - {fileID: 4764315596172853462, guid: 98ca2b4646a0284f4b7084ffc679b3d2, type: 3}
-  - {fileID: 9169723746930017575, guid: a38a2fe629c91e79ca4e7100761d10ea, type: 3}
-  - {fileID: 7512427723648234251, guid: a78bdcea25135ff41a826044a0da7721, type: 3}
-  - {fileID: 720712121213023640, guid: def286a70702e2d999ef14ed1c0f5312, type: 3}
-  - {fileID: 1450210304086034654, guid: b51a27649ffe1afb6ad437a7cd3f3601, type: 3}
-  - {fileID: 996298341278625016, guid: 50eb04c31996d9f6298306292c087738, type: 3}
-  - {fileID: 8227723141330817891, guid: 1d36110b58e66978b8f550a647a87472, type: 3}
-  - {fileID: 3154786804435165318, guid: 752abd0212e11c7c4b18d2850cb1011d, type: 3}
-  - {fileID: 2782199628553210453, guid: 4b711c6ee1ab350b69d71373476285cb, type: 3}
+  enemyObjects:
+  - {fileID: 7279181079964809088, guid: d6aef6353fe541948a816c6ce553ee21, type: 3}
+  deviationRate: 10
+  roomRate: 15
+  maxRouteLength: 30
+  maxRoutes: 20
