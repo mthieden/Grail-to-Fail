@@ -8,4 +8,10 @@ AnimatorOverrideController:
   m_PrefabAsset: {fileID: 0}
   m_Name: Enemy_Zombie
   m_Controller: {fileID: 9100000, guid: fdb8829dc82c956429e3f7e1ef053c47, type: 2}
-  m_Clips: []
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: d0026dec572ab064fa7328a2e9de260f, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: bfb3fe6732c04584485e7c2236ad5754, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: f2b6d5fc60f92a24a88ed244335868fd, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: dc73f2f97e0cbb244b1dcc92873ff659, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 9b5198d47c063814ba911cf5952d07f0, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: fae1307793e935146ba7e442252881a7, type: 2}
