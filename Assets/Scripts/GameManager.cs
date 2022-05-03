@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Completed;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 
@@ -10,7 +11,7 @@ public class GameManager : MonoBehaviour {
     public float turnDelay = .1f;
     public static GameManager instance = null;
     public BoardManager boardScript;
-    public int playerFoodPoints = 1000;
+    public int playerFoodPoints;
 
 
     public Text levelText;
@@ -20,8 +21,12 @@ public class GameManager : MonoBehaviour {
     private bool enemiesMoving;
     private bool doingSetup;
 
+    private static int testasd = 0;
+
     void Awake()
     {
+        Debug.Log("Waking up ...");
+
         if (instance == null)
             instance = this;
         else if (instance != this)
@@ -29,17 +34,32 @@ public class GameManager : MonoBehaviour {
         DontDestroyOnLoad(gameObject);
         enemies = new List<Enemy>();
         boardScript = GetComponent<BoardManager>();
-        InitGame();
+        //InitGame();
     }
 
-    private void OnLevelWasLoaded (int index)
+
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        level++;
-
-        InitGame();
+        
+        //level++;
+        if(scene.name == "Main")
+        {
+            InitGame();
+        }
     }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        //level++;
+        //InitGame();
+    }
+
     void InitGame()
     {
+        testasd++;
+        Debug.Log("INITGAME" + testasd);
         doingSetup = true;
 
         levelImage = GameObject.Find("LevelImage");
@@ -62,10 +82,24 @@ public class GameManager : MonoBehaviour {
     {
         enemies.Add(script);
     }
+
+    public void NextLevel()
+    {
+        if(Player.instance == null) { Debug.Log("PLAYER IS NULL???!!?"); }
+        playerFoodPoints = Player.instance.Food;
+        level++;
+        SceneManager.LoadScene("Main");
+    }
+    
+
     public void GameOver()
     {
-        levelText.text = "you reached level" + level;
-        levelImage.SetActive(true);
-        enabled = false;
+        SceneManager.LoadScene("GameOver");
+        playerFoodPoints = 100;
+        Debug.Log("RESETTING FOOD: " + playerFoodPoints);
+        level = 1;
+        //levelText.text = "you reached level" + level;
+        //levelImage.SetActive(true);
+        //enabled = false;
     }
 }

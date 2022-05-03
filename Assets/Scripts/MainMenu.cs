@@ -7,12 +7,18 @@ public class MainMenu : MonoBehaviour
 {
     public void ExitButton()
     {
-        Application.Quit();
-        Debug.Log("Closed game");
+        SceneManager.LoadScene("GameOver");
+        //Application.Quit();
+        //Debug.Log("Closed game");
     }
 
     public void StartButton()
     {
         SceneManager.LoadScene("Main");
+    }
+
+    public void GameOverButton()
+    {
+        SceneManager.LoadScene("Menu");
     }
 }
