@@ -12,6 +12,7 @@ public class Player : MovingObject {
     public int pointsPerFood = 10;
     public int pointsPerSoda = 20;
     public float restartLevelDelay = 1f;
+    private bool invincible = false;
     public Text foodText;
     public AudioClip moveSound1;
     public AudioClip moveSound2;
@@ -43,8 +44,7 @@ public class Player : MovingObject {
 
         food = GameManager.instance.playerFoodPoints;
 
-        foodText.text = "Food: " + food;
-
+        foodText.text = "HP: " + health;
 
         base.Start();
     }
@@ -86,7 +86,7 @@ public class Player : MovingObject {
     protected override void AttemptMove <T> (float xDir, float yDir)
     {
         //food--;
-        foodText.text = "HP:  " + food;
+        foodText.text = "HP:  " + health;
 
         base.AttemptMove<T>(xDir, yDir);
 
@@ -94,7 +94,7 @@ public class Player : MovingObject {
         CheckIfGameOver();
 
     }
-    
+
     private void LookDirection()
     {
         Vector2 lookDir = mousePos - playerbody.position;
@@ -143,12 +143,24 @@ public class Player : MovingObject {
         Application.LoadLevel(Application.loadedLevel);
     }
 
-    public void LoseFood (int loss)
+    public void LoseHealth (int loss)
     {
-        animator.SetTrigger("playerHit");
-        food -= loss;
-        foodText.text = "-" + loss + " Food: " + food;
-        CheckIfGameOver();
+        if (!invincible)
+        {
+            animator.SetTrigger("playerHit");
+            health -= loss;
+            foodText.text = "HP: " + food;
+            CheckIfGameOver();
+        }
+    }
+    public void setInvincible ()
+    {
+        invincible = true;
+    }
+
+    public void removeInvincible ()
+    {
+        invincible = false;
     }
 
     private void CheckIfGameOver()

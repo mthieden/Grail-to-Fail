@@ -87,13 +87,13 @@ protected virtual void Move(Vector2 force)
     if (Vector2.Distance(transform.position, player.position) < stopdistance){
         animator.SetBool("enemyRunning", false);
         animator.SetBool("enemyHit", true);
-    } 
+    }
     if (Vector2.Distance(transform.position, player.position) > stopdistance){
         animator.SetBool("enemyHit", false);
     }
 }
 protected virtual void Attack(){
-    GameObject.FindObjectOfType<Player>().health -= damage;
+    GameObject.FindObjectOfType<Player>().LoseHealth(damage);
 }
 protected virtual void LookDirection(Vector2 force)
 {
