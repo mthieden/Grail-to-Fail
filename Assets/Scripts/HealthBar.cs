@@ -20,17 +20,4 @@ public class HealthBar : MonoBehaviour
     {
         slider.value = currentHealth;
     }
-
-    public void FlipBar(bool flip)
-    {
-        if(flip)
-        {
-            slider.transform.localScale.Set(1f, 1f, -1f);
-        }
-        else
-        {
-            slider.transform.localScale.Set(1f, 1f, 1f);
-        }
-        
-    }
 }
