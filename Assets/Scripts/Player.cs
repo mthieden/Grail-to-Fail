@@ -12,7 +12,7 @@ public class Player : MovingObject {
     public int pointsPerFood = 10;
     public int pointsPerSoda = 20;
     public float restartLevelDelay = 1f;
-    private volatile bool invincible = false;
+    private bool invincible = false;
     public Text foodText;
     public AudioClip moveSound1;
     public AudioClip moveSound2;

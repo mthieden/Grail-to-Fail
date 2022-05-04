@@ -87,7 +87,7 @@ protected virtual void Move(Vector2 force)
     if (Vector2.Distance(transform.position, player.position) < stopdistance){
         animator.SetBool("enemyRunning", false);
         animator.SetBool("enemyHit", true);
-    } 
+    }
     if (Vector2.Distance(transform.position, player.position) > stopdistance){
         animator.SetBool("enemyHit", false);
     }
