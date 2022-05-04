@@ -23,18 +23,23 @@ public class Enemy : MonoBehaviour
     private Player playerObj;
 
     private Animator animator;
+    private SpriteRenderer sprite;
 
     public float stopdistance;
 
+    public HealthBar healthBar;
 
     protected virtual void Start()
     {
         animator = GetComponent<Animator>();
+        sprite = GetComponent<SpriteRenderer>();
         seeker = GetComponent<Seeker>();
         player = GameObject.FindObjectOfType<Player>().transform;
         playerObj = Player.instance;
         boxCollider = GetComponent<BoxCollider2D>();
         rb2D = GetComponent<Rigidbody2D>();
+
+        healthBar.InitHealthBar(hp, hp);
 
         InvokeRepeating("UpdatePath", 0f, .5f);
 
@@ -100,18 +105,34 @@ public class Enemy : MonoBehaviour
     }
     protected virtual void Attack()
     {
+        Debug.Log("PLAYER BEING ATTACKED");
         playerObj.TakeDamage(damage);
         //GameObject.FindObjectOfType<Player>().health -= damage;
+    }
+
+    public void takeDamage(int damage)
+    {
+        hp -= damage;
+        healthBar.UpdateBar(hp);
+        if (hp <= 0)
+        {
+            // DROP LOOT AND DIE
+            //Instantiate(loot, this.transform.position, this.transform.rotation);
+            Destroy(this.gameObject);
+        }
     }
     protected virtual void LookDirection(Vector2 force)
     {
         if (force.x >= 0.01f)
         {
-            rb2D.transform.localScale = new Vector3(1f, 1f, 1f);
+            //rb2D.transform.localScale = new Vector3(1f, 1f, 1f);
+            sprite.flipX = false;
+            
         }
         else if (force.x <= -0.01f)
         {
-            rb2D.transform.localScale = new Vector3(-1f, 1f, 1f);
+            sprite.flipX = true;
+            //rb2D.transform.localScale = new Vector3(-1f, 1f, 1f);
         }
     }
 }

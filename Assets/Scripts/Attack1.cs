@@ -7,7 +7,9 @@ public class Attack1 : Attack
     Enemy enemy;
     private int damage = 10;
     private int modifier;
-    
+
+    List<Enemy> hitEnemies = new List<Enemy>();
+
     void Start()
     {
         modifier = base.currentdamagemodifier;
@@ -25,6 +27,14 @@ public class Attack1 : Attack
         if (collision.collider.name.Contains("Enemy"))
         {
             enemy = collision.collider.GetComponent<Enemy>();
+            if (!hitEnemies.Contains(enemy))
+            {
+                enemy.takeDamage(damage * modifier);
+                hitEnemies.Add(enemy);
+            }
+
+            /*
+            enemy = collision.collider.GetComponent<Enemy>();
             enemy.hp -= damage*modifier;
             Debug.Log(enemy.hp);
             Destroy(gameObject);
@@ -32,6 +42,7 @@ public class Attack1 : Attack
             {
                 GameManager.Destroy(enemy.gameObject);
             }
+            */
         }
         if (collision.collider.name.Contains("boss"))
         {

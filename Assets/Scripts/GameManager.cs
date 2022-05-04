@@ -96,7 +96,6 @@ public class GameManager : MonoBehaviour {
     {
         SceneManager.LoadScene("GameOver");
         playerFoodPoints = 100;
-        Debug.Log("RESETTING FOOD: " + playerFoodPoints);
         level = 1;
         //levelText.text = "you reached level" + level;
         //levelImage.SetActive(true);
