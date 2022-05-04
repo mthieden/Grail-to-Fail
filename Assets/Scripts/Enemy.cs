@@ -93,7 +93,7 @@ protected virtual void Move(Vector2 force)
     }
 }
 protected virtual void Attack(){
-    GameObject.FindObjectOfType<Player>().health -= damage;
+    GameObject.FindObjectOfType<Player>().LoseHealth(damage);
 }
 protected virtual void LookDirection(Vector2 force)
 {
