@@ -31,8 +31,8 @@ public class Enemy : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         seeker = GetComponent<Seeker>();
+        playerObj= Player.instance;
         player = GameObject.FindObjectOfType<Player>().transform;
-        playerObj = Player.instance;
         boxCollider = GetComponent<BoxCollider2D>();
         rb2D = GetComponent<Rigidbody2D>();
 
@@ -47,7 +47,7 @@ public class Enemy : MonoBehaviour
     }
     protected virtual void OnPathComplete(Path p)
     {
-        if (!p.error)
+        if(!p.error)
         {
             path = p;
             currentWaypoint = 0;
@@ -63,8 +63,7 @@ public class Enemy : MonoBehaviour
         {
             reachedEndOfPath = true;
             return;
-        }
-        else
+        } else
         {
             reachedEndOfPath = false;
         }
@@ -80,6 +79,13 @@ public class Enemy : MonoBehaviour
         }
         LookDirection(force);
 
+    }
+    protected virtual void Move(Vector2 force)
+    {
+        if((Vector2.Distance(transform.position, player.position) < detectionAoe) & (Vector2.Distance(transform.position, player.position) > stopdistance)){
+            rb2D.AddForce(force);
+            animator.SetBool("enemyRunning", true);
+        }
         if (Vector2.Distance(transform.position, player.position) < stopdistance){
             animator.SetBool("enemyRunning", false);
             animator.SetBool("enemyHit", true);
@@ -88,30 +94,19 @@ public class Enemy : MonoBehaviour
             animator.SetBool("enemyHit", false);
         }
     }
+    protected virtual void Attack(){
+        playerObj.TakeDamage(damage);
+    }
     protected virtual void LookDirection(Vector2 force)
     {
         if (force.x >= 0.01f)
         {
-            if ((Vector2.Distance(transform.position, player.position) < detectionAoe) & (Vector2.Distance(transform.position, player.position) > stopdistance))
-            {
-                rb2D.AddForce(force);
-                animator.SetBool("enemyRunning", true);
-            }
-            if (Vector2.Distance(transform.position, player.position) < stopdistance)
-            {
-                animator.SetBool("enemyRunning", false);
-                animator.SetBool("enemyHit", true);
-            }
-            if (Vector2.Distance(transform.position, player.position) > stopdistance)
-            {
-                animator.SetBool("enemyHit", false);
-            }
+            rb2D.transform.localScale = new Vector3 (1f,1f,1f);
         }
-    }
-
-    protected virtual void Attack()
-    {
-        playerObj.TakeDamage(damage);
+        else if (force.x <= -0.01f)
+        {
+            rb2D.transform.localScale = new Vector3 (-1f,1f,1f);
+        }
     }
 }
 

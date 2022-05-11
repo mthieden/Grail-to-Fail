@@ -176,20 +176,12 @@ public class Player : MovingObject {
         if (timeSinceLastDamage >= 30)
         {
             timeSinceLastDamage = 0;
-            LoseFood(damage);
+            //animator.SetTrigger("playerHit");
+            health -= damage;
+            foodText.text = "HP: " + food;
         }
     }
 
-    public void LoseHealth (int loss)
-    {
-        if (!invincible)
-        {
-            animator.SetTrigger("playerHit");
-            health -= loss;
-            foodText.text = "HP: " + food;
-            CheckIfGameOver();
-        }
-    }
     public void setInvincible ()
     {
         invincible = true;
@@ -202,7 +194,7 @@ public class Player : MovingObject {
 
     private void CheckIfGameOver()
     {
-        if (food <= 0)
+        if (health <= 0)
         {
             //SoundManager.instance.PlaySingle(gameOverSound);
             //SoundManager.instance.musicSource.Stop();
