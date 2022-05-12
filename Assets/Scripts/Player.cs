@@ -196,6 +196,7 @@ public class Player : MovingObject {
     {
         if (health <= 0)
         {
+            Debug.Log("GAME IS NOW OVER");
             //SoundManager.instance.PlaySingle(gameOverSound);
             //SoundManager.instance.musicSource.Stop();
             GameManager.instance.GameOver();
