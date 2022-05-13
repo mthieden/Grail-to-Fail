@@ -85,7 +85,6 @@ public class GameManager : MonoBehaviour {
     {
         playerHealth = Player.instance.Health;
         level++;
-        Debug.Log("SAVED PLAYER HEALTH IN MANGAGER: " + playerHealth);
         SceneManager.LoadScene("Main");
     }
     
@@ -93,11 +92,6 @@ public class GameManager : MonoBehaviour {
     public void GameOver()
     {
         SceneManager.LoadScene("GameOver");
-        //playerHealth = 100;
         level = 1;
-
-        //levelText.text = "you reached level" + level;
-        //levelImage.SetActive(true);
-        //enabled = false;
     }
 }

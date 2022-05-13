@@ -201,10 +201,9 @@ MonoBehaviour:
   blockingLayer:
     serializedVersion: 2
     m_Bits: 256
-  wallDamage: 1
-  restartLevelDelay: 1
+  completeLevelDelay: 1
   healthText: {fileID: 0}
-  MaxHealth: 120
+  maxHealth: 150
   maincamera: {fileID: 0}
   offset: {x: 0, y: 0, z: -10}
 --- !u!58 &8916861448626893686

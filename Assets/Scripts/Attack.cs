@@ -77,7 +77,7 @@ public class Attack : MonoBehaviour
            Rigidbody2D rb2d = attack.GetComponent<Rigidbody2D>();
            rb2d.AddForce(lookDir * Attackforce, ForceMode2D.Impulse);
         }
-        if (currentweapon.name == "Attack2")
+        else if (currentweapon.name == "Attack2")
         {
            for (int i = 1; i < 4; i++){ 
            GameObject attack = Instantiate(currentweapon, Weapon.position,  Weapon.rotation);
@@ -86,7 +86,7 @@ public class Attack : MonoBehaviour
            rb2d.AddForce(attack.transform.up * Attackforce, ForceMode2D.Impulse);
            }
         }
-        if (currentweapon.name == "Attack5")
+        else if (currentweapon.name == "Attack5")
         {
             GameObject attack = Instantiate(currentweapon, Weapon.position+ new Vector3 (0.5F,0.5F,0), Weapon.rotation);
         }

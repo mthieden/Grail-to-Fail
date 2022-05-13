@@ -4,74 +4,50 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class Player : MovingObject {
+public class Player : MonoBehaviour {
 
     public static Player instance { get; private set; }
 
-    public int wallDamage = 1;
-
-    
-    
-    public float restartLevelDelay = 1f;
-    private bool invincible = false;
-    public Text healthText;
-    /*
-    public AudioClip moveSound1;
-    public AudioClip moveSound2;
-    public AudioClip eatSound1;
-    public AudioClip eatSound2;
-    public AudioClip drinkSound1;
-    public AudioClip drinkSound2;
-    public AudioClip gameOverSound;
-    */
-
-
-    private Animator animator;
-
     public int maxHealth;
     private int health;
-    public int Health 
+    public int Health
     {
-        get { return health; } 
+        get { return health; }
         set { health = value; }
     }
 
-    private Vector2 moveDirection;
-
+    public Text healthText;
     public Camera maincamera;
+    public Vector3 offset;
+    public LayerMask blockingLayer;
+    public float completeLevelDelay = 1f;
+    public float moveSpeed;
 
     private Vector2 mousePos;
-
+    private Vector2 moveDirection;
     private Rigidbody2D playerbody;
+    private Animator animator;    
 
-    public Vector3 offset;
-
+    private bool invincible = false;
     private int timeSinceLastDamage = 30;
 
     void Awake()
     {
-
-        Debug.Log("PLAYER WAKING UP");
         health = maxHealth;
     }
 
     private void OnEnable()
     {
-        Debug.Log("ENABLING, INSTANCE IS: " + this.name.ToString());
         instance = this;
     }
 
-    protected override void Start()
+    private void Start()
     {
         
         animator = GetComponent<Animator>();
         playerbody = GetComponent<Rigidbody2D>();
-        //health = GameManager.instance.playerHealth;
         healthText.text = "HP: " + health;
-
-        Debug.Log("PALYER START, CURRENT HEALTH: " + health);
-
-        base.Start();
+        //base.Start();
 
     }
 
@@ -81,7 +57,8 @@ public class Player : MovingObject {
             animator.SetBool("playerRunning", false);
         else
             animator.SetBool("playerRunning", true);
-        AttemptMove<Wall>(moveDirection.x, moveDirection.y);
+        Move(moveDirection.x, moveDirection.y);
+        LookDirection();
 
         if (timeSinceLastDamage < 30) timeSinceLastDamage++;
     }
@@ -94,32 +71,21 @@ public class Player : MovingObject {
 
     private void OnDisable()
     {
-        Debug.Log("DISABLING, INSTANCE WAS: " + this.ToString());
         instance = null;
     }
 
     private void ProcessInputs()
     {
-
         float moveX = Input.GetAxisRaw("Horizontal");
         float moveY = Input.GetAxisRaw("Vertical");
-
         maincamera.transform.position = playerbody.transform.position + offset;
-
         mousePos = maincamera.ScreenToWorldPoint(Input.mousePosition);
-
         moveDirection = new Vector2(moveX, moveY).normalized;
-
     }
-    protected override void AttemptMove <T> (float xDir, float yDir)
+
+    protected void Move(float xDir, float yDir)
     {
-        //food--;
-        healthText.text = "HP:  " + health;
-
-        base.AttemptMove<T>(xDir, yDir);
-
-        LookDirection();
-
+        playerbody.velocity = new Vector2(xDir * moveSpeed, yDir * moveSpeed);
     }
 
     private void LookDirection()
@@ -139,30 +105,32 @@ public class Player : MovingObject {
     {
         if (other.tag == "Exit")
         {
-            Invoke("Restart", restartLevelDelay);
+            Invoke("CompleteLevel", completeLevelDelay);
         }
     }
 
-    private void Restart()
+    private void CompleteLevel()
     {
         GameManager.instance.NextLevel();
     }
 
     public void TakeDamage(int damage)
     {
-        if (timeSinceLastDamage >= 30)
+        if(!invincible)
         {
-            timeSinceLastDamage = 0;
-            //animator.SetTrigger("playerHit");
-            health -= damage;
-            healthText.text = "HP: " + health;
-            CheckIfGameOver();
+            if (timeSinceLastDamage >= 30)
+            {
+                timeSinceLastDamage = 0;
+                animator.SetTrigger("playerHit");
+                health -= damage;
+                healthText.text = "HP: " + health;
+                CheckIfGameOver();
+            }
         }
     }
 
     public void setInvincible ()
     {
-        Debug.Log("BECOMING INVINCIBLE!");
         invincible = true;
     }
 
@@ -173,7 +141,6 @@ public class Player : MovingObject {
 
     private void CheckIfGameOver()
     {
-        Debug.Log("CHECKING IF GAME IS OVER??");
         if (health <= 0)
         {
             //SoundManager.instance.PlaySingle(gameOverSound);

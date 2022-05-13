@@ -16,12 +16,10 @@ public class Enemy : MonoBehaviour
     public int damage;
     public float detectionAoe;
     public float attackSpeed;
+
     private BoxCollider2D boxCollider;
     private Rigidbody2D rb2D;
-
     private Transform player;
-    private Player playerObj;
-
     private Animator animator;
     private SpriteRenderer sprite;
 
@@ -33,7 +31,6 @@ public class Enemy : MonoBehaviour
         animator = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
         seeker = GetComponent<Seeker>();
-        playerObj= Player.instance;
         player = GameObject.FindObjectOfType<Player>().transform;
         boxCollider = GetComponent<BoxCollider2D>();
         rb2D = GetComponent<Rigidbody2D>();
@@ -81,8 +78,8 @@ public class Enemy : MonoBehaviour
             currentWaypoint++;
         }
         LookDirection(force);
-
     }
+
     protected virtual void Move(Vector2 force)
     {
         if((Vector2.Distance(transform.position, player.position) < detectionAoe) & (Vector2.Distance(transform.position, player.position) > stopdistance)){
@@ -98,7 +95,12 @@ public class Enemy : MonoBehaviour
         }
     }
     protected virtual void Attack(){
-        playerObj.TakeDamage(damage);
+
+        // Deal damage if the player is still within range
+        if (Vector2.Distance(transform.position, player.position) < stopdistance)
+        {
+            Player.instance.TakeDamage(damage);
+        }
     }
 
     public void takeDamage(int damage)
