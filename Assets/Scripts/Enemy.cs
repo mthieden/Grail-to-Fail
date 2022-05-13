@@ -23,18 +23,21 @@ public class Enemy : MonoBehaviour
     private Player playerObj;
 
     private Animator animator;
+    private SpriteRenderer sprite;
 
     public float stopdistance;
-
+    public HealthBar healthBar;
 
     protected virtual void Start()
     {
         animator = GetComponent<Animator>();
+        sprite = GetComponent<SpriteRenderer>();
         seeker = GetComponent<Seeker>();
         playerObj= Player.instance;
         player = GameObject.FindObjectOfType<Player>().transform;
         boxCollider = GetComponent<BoxCollider2D>();
         rb2D = GetComponent<Rigidbody2D>();
+        healthBar.InitHealthBar(hp, hp);
 
         InvokeRepeating("UpdatePath", 0f, .5f);
 
@@ -97,15 +100,28 @@ public class Enemy : MonoBehaviour
     protected virtual void Attack(){
         playerObj.TakeDamage(damage);
     }
+
+    public void takeDamage(int damage)
+    {
+        hp -= damage;
+        healthBar.UpdateBar(hp);
+        if (hp <= 0)
+        {
+            // DROP LOOT AND DIE
+            //Instantiate(loot, this.transform.position, this.transform.rotation);
+            Destroy(this.gameObject);
+        }
+    }
+
     protected virtual void LookDirection(Vector2 force)
     {
         if (force.x >= 0.01f)
         {
-            rb2D.transform.localScale = new Vector3 (1f,1f,1f);
+            sprite.flipX = false;
         }
         else if (force.x <= -0.01f)
         {
-            rb2D.transform.localScale = new Vector3 (-1f,1f,1f);
+            sprite.flipX = true;
         }
     }
 }

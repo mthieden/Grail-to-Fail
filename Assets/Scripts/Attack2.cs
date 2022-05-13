@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class Attack2 : Attack
 {
-     Enemy enemy;
-
+    Enemy enemy;
     private int damage = 10;
     private int modifier;
 
@@ -25,13 +24,8 @@ public class Attack2 : Attack
         if (collision.collider.name.Contains("Enemy"))
         {
             enemy = collision.collider.GetComponent<Enemy>();
-            enemy.hp -= damage*modifier;
-            Debug.Log(enemy.hp);
+            enemy.takeDamage(damage * modifier);
             Destroy(gameObject);
-            if (enemy.hp <= 0)
-            {
-                GameManager.Destroy(enemy.gameObject);
-            }
         }
         if (collision.collider.name.Contains("boss"))
         {

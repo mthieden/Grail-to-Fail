@@ -8,8 +8,6 @@ public class MainMenu : MonoBehaviour
     public void ExitButton()
     {
         SceneManager.LoadScene("GameOver");
-        //Application.Quit();
-        //Debug.Log("Closed game");
     }
 
     public void StartButton()

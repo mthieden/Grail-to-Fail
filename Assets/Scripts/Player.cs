@@ -184,6 +184,7 @@ public class Player : MovingObject {
 
     public void setInvincible ()
     {
+        Debug.Log("BECOMING INVINCIBLE!");
         invincible = true;
     }
 
