@@ -11,21 +11,18 @@ public class GameManager : MonoBehaviour {
     public float turnDelay = .1f;
     public static GameManager instance = null;
     public BoardManager boardScript;
-    public int playerFoodPoints;
+    public int playerHealth;
 
 
     public Text levelText;
     private GameObject levelImage;
     private int level = 1;
     private List<Enemy> enemies;
-    private bool enemiesMoving;
-    private bool doingSetup;
-
-    private static int testasd = 0;
 
     void Awake()
     {
-        Debug.Log("Waking up ...");
+
+        Debug.Log("MANAGER WAKING UP");
 
         if (instance == null)
             instance = this;
@@ -34,33 +31,35 @@ public class GameManager : MonoBehaviour {
         DontDestroyOnLoad(gameObject);
         enemies = new List<Enemy>();
         boardScript = GetComponent<BoardManager>();
+       // if (Player.instance == null) { Debug.Log("PLAYER IS NULL???!!?"); }
         //InitGame();
-    }
-
-
-
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        
-        //level++;
-        if(scene.name == "Main")
-        {
-            InitGame();
-        }
     }
 
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void Start()
+    {
+        Debug.Log("STARTING MANAGER");
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        Debug.Log("MAIN SCENE LOADED");
+
         //level++;
-        //InitGame();
+        if (scene.name == "Main")
+        {
+            InitGame();
+        }
     }
 
     void InitGame()
     {
-        testasd++;
-        Debug.Log("INITGAME" + testasd);
-        doingSetup = true;
+        Debug.Log("INITGAME, playerHleath: " + playerHealth);
+        if(level > 1) Player.instance.Health = playerHealth;
 
         levelImage = GameObject.Find("LevelImage");
         levelText = GameObject.Find("LevelText").GetComponent<Text>();
@@ -75,7 +74,6 @@ public class GameManager : MonoBehaviour {
     private void HideLevelImage()
     {
         levelImage.SetActive(false);
-        doingSetup = false;
     }
 
     public void AddEnemyToList(Enemy script)
@@ -85,9 +83,9 @@ public class GameManager : MonoBehaviour {
 
     public void NextLevel()
     {
-        if(Player.instance == null) { Debug.Log("PLAYER IS NULL???!!?"); }
-        playerFoodPoints = Player.instance.Food;
+        playerHealth = Player.instance.Health;
         level++;
+        Debug.Log("SAVED PLAYER HEALTH IN MANGAGER: " + playerHealth);
         SceneManager.LoadScene("Main");
     }
     
@@ -95,8 +93,9 @@ public class GameManager : MonoBehaviour {
     public void GameOver()
     {
         SceneManager.LoadScene("GameOver");
-        playerFoodPoints = 100;
+        //playerHealth = 100;
         level = 1;
+
         //levelText.text = "you reached level" + level;
         //levelImage.SetActive(true);
         //enabled = false;

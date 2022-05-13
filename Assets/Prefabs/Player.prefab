@@ -202,17 +202,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   wallDamage: 1
-  pointsPerFood: 10
-  pointsPerSoda: 20
   restartLevelDelay: 1
-  foodText: {fileID: 0}
-  moveSound1: {fileID: 0}
-  moveSound2: {fileID: 0}
-  eatSound1: {fileID: 0}
-  eatSound2: {fileID: 0}
-  drinkSound1: {fileID: 0}
-  drinkSound2: {fileID: 0}
-  gameOverSound: {fileID: 0}
+  healthText: {fileID: 0}
+  MaxHealth: 120
   maincamera: {fileID: 0}
   offset: {x: 0, y: 0, z: -10}
 --- !u!58 &8916861448626893686
@@ -245,5 +237,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Weapon: {fileID: 8707850132952388630}
   Attack1: {fileID: 956648772370266860, guid: 11f026dc73b0e4b48815b2e53acb85eb, type: 3}
-  maincamera: {fileID: 0}
+  Attack2: {fileID: 0}
+  Attack5: {fileID: 0}
+  currentdamagemodifier: 1
   Attackforce: 20

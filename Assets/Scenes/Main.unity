@@ -629,6 +629,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8145719821933328196, guid: 20d2971beeebe9cd09b19556ba5ed3f7,
+        type: 3}
+      propertyPath: m_Name
+      value: HPText
+      objectReference: {fileID: 0}
     - target: {fileID: 8145719822328015578, guid: 20d2971beeebe9cd09b19556ba5ed3f7,
         type: 3}
       propertyPath: m_Pivot.x
@@ -761,6 +766,16 @@ PrefabInstance:
     - target: {fileID: 8707850132051645760, guid: ff232debe71d6c64498f5fbbd8144759,
         type: 3}
       propertyPath: foodText
+      value: 
+      objectReference: {fileID: 563468916}
+    - target: {fileID: 8707850132051645760, guid: ff232debe71d6c64498f5fbbd8144759,
+        type: 3}
+      propertyPath: maxHealth
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 8707850132051645760, guid: ff232debe71d6c64498f5fbbd8144759,
+        type: 3}
+      propertyPath: healthText
       value: 
       objectReference: {fileID: 563468916}
     - target: {fileID: 8707850132051645760, guid: ff232debe71d6c64498f5fbbd8144759,

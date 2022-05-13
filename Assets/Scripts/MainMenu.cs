@@ -18,5 +18,13 @@ public class MainMenu : MonoBehaviour
     public void GameOverButton()
     {
         SceneManager.LoadScene("Menu");
+        if(Player.instance == null)
+        {
+            Debug.Log("GAME IS OVER AND PLAYER IS NULL");
+        }
+        else
+        {
+            Debug.Log("GAME IS OVER, PLAYER IS NOT NULL");
+        }
     }
 }

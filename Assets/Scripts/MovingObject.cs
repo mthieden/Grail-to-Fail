@@ -32,8 +32,4 @@ public abstract class MovingObject : MonoBehaviour {
     Move(xDir, yDir);
 
     }
-
-
-    protected abstract void OnCantMove<T>(T component)
-        where T : Component;
 }
