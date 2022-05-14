@@ -7,7 +7,6 @@ public class Attack5 : Attack
     Enemy enemy;
     private int damage = 10;
     private int modifier;
-    public Player player;
 
     void Start()
     {
@@ -15,8 +14,7 @@ public class Attack5 : Attack
     }
     void FixedUpdate()
     {
-        player = GameObject.FindObjectOfType<Player>();
-        transform.RotateAround(player.transform.position, new Vector3 (0,0,1), 180f*Time.deltaTime);
+        transform.RotateAround(Player.instance.transform.position, new Vector3 (0,0,1), 180f*Time.deltaTime);
     }
     void OnCollisionEnter2D(Collision2D collision)
     {

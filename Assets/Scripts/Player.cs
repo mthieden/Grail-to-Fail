@@ -43,20 +43,17 @@ public class Player : MonoBehaviour {
 
     private void Start()
     {
-        
         animator = GetComponent<Animator>();
         playerbody = GetComponent<Rigidbody2D>();
         healthText.text = "HP: " + health;
-        //base.Start();
-
     }
 
     private void FixedUpdate()
     {
-        if (moveDirection.x == 0 && moveDirection.y == 0)
-            animator.SetBool("playerRunning", false);
-        else
+        if (moveDirection.x != 0 || moveDirection.y != 0)
             animator.SetBool("playerRunning", true);
+        else
+            animator.SetBool("playerRunning", false);
         Move(moveDirection.x, moveDirection.y);
         LookDirection();
 
@@ -92,7 +89,7 @@ public class Player : MonoBehaviour {
     {
         Vector2 lookDir = mousePos - playerbody.position;
         float mouseangle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
-        if ((mouseangle >= 0 && mouseangle <= 90) || (mouseangle <= 0 && mouseangle >= -90 ))
+        if ((mouseangle >= 0 && mouseangle <= 90) || (mouseangle <= 0 && mouseangle >= -90 )) //(lookDir.x > 0)
         {
             playerbody.transform.localScale = new Vector3 (1,1,1);
         }
