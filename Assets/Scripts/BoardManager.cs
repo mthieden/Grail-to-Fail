@@ -283,7 +283,13 @@ namespace Completed
                 wallPositions.Add(pos);
             }
             if (radius>1)
-                spawnEnemies(enemyObjects[0],radius,radius*2, new Vector2Int( minX,minY), new Vector2Int( maxX ,maxY));
+            {
+                
+                int randomEnemyIndex = Random.Range(0, enemyObjects.Length);
+                spawnEnemies(enemyObjects[randomEnemyIndex], radius, radius * 2, new Vector2Int(minX, minY), new Vector2Int(maxX, maxY));
+            }
+
+                
         }
     }
 }
