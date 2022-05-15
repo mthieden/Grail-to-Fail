@@ -1,3 +1,4 @@
+using Pathfinding;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using Random = UnityEngine.Random;
@@ -34,6 +35,7 @@ namespace Completed
         private int routeCount = 0;
 
         private int bossRoute = 0;
+        private int level = 0;
         private Vector2Int bossRoom = new Vector2Int(0,0);
 
         private Transform boardHolder;
@@ -80,7 +82,7 @@ namespace Completed
         {
             boardHolder = new GameObject ("Board").transform;
             InitialiseList();
-            int enemyCount = (int)Math.Log(level,2f);
+            this.level = level;
             int x = 0;
             int y = 0;
             int routeLength = 0;
@@ -96,6 +98,7 @@ namespace Completed
             }
             createBossRoom();
             FillWalls();
+            AstarPath.active.Scan();
             //Instantiate(exit, new Vector3(previousPos.x,previousPos.y, 0F), Quaternion.identity);
         }
 
@@ -283,11 +286,16 @@ namespace Completed
                 wallPositions.Add(pos);
             }
             if (radius>1)
-            {                
+            {
+                int randomEnemyIndex = 0;
 
-                int randomEnemyIndex = Random.Range(0, enemyObjects.Length);
+                if (level >= enemyObjects.LongLength)
+                    randomEnemyIndex = Random.Range(0, enemyObjects.Length);
+                else
+                    randomEnemyIndex = level-1;
+
                 spawnEnemies(enemyObjects[randomEnemyIndex], radius, radius * 2, new Vector2Int(minX, minY), new Vector2Int(maxX, maxY));
-            }                
+            }
         }
     }
 }

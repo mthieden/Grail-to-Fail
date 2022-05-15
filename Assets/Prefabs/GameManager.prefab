@@ -77,11 +77,11 @@ MonoBehaviour:
   - {fileID: 7512427723648234251, guid: a78bdcea25135ff41a826044a0da7721, type: 3}
   foodTiles: []
   enemyObjects:
-  - {fileID: 1661714413819323612, guid: c95363997796320439108bd49b3706cb, type: 3}
-  - {fileID: 355217941892812945, guid: 6fe1d80c2742c904587187277beb5624, type: 3}
   - {fileID: 7279181079964809088, guid: d6aef6353fe541948a816c6ce553ee21, type: 3}
-  - {fileID: 7082556856670930614, guid: b92ed8d80ea153842a05e4fcb5e882d2, type: 3}
   - {fileID: 353238696523535199, guid: b507b157567b3a346984e5c75a71945c, type: 3}
+  - {fileID: 7082556856670930614, guid: b92ed8d80ea153842a05e4fcb5e882d2, type: 3}
+  - {fileID: 355217941892812945, guid: 6fe1d80c2742c904587187277beb5624, type: 3}
+  - {fileID: 1661714413819323612, guid: c95363997796320439108bd49b3706cb, type: 3}
   deviationRate: 10
   roomRate: 15
   maxRouteLength: 30
